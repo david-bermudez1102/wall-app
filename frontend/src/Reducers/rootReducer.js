@@ -1,6 +1,6 @@
-import combineReducers from "react-combine-reducers"
+import { combineReducers } from "redux"
 import { messages } from "./messagesReducer"
 
-export const [rootReducer, initialState] = combineReducers({
-	messages: [messages, []]
+export const rootReducer = combineReducers({
+	messages
 })

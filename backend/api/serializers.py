@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ['id', 'username', 'first_name', 'last_name']
 
 class UserSerializerWithToken(serializers.ModelSerializer):
 
@@ -32,7 +32,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'password')
+        fields = ('token', 'username', 'password', 'first_name', 'last_name')
 
 
 class MessageSerializer(serializers.ModelSerializer):

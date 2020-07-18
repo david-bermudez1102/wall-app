@@ -1,31 +1,20 @@
 import React from "react"
 import "./App.scss"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from "./Components/Login"
 import Wall from "./Components/Wall"
 import SignUp from "./Components/Signup"
 import Store from "./Store"
-import { Layout, Menu } from "antd"
-const { Header, Content, Footer } = Layout
+import { Layout } from "antd"
+import Navbar from "./Components/Navbar"
+const { Content, Footer } = Layout
 
 function App() {
 	return (
 		<Store>
 			<Router>
 				<Layout style={{ width: "100%", position: "relative" }}>
-					<Header>
-						<Menu theme='dark' mode='horizontal' defaultSelectedKeys={["2"]}>
-							<Menu.Item key='/login'>
-								<Link to={"/login"}>Login</Link>
-							</Menu.Item>
-							<Menu.Item key='signup'>
-								<Link to={"/signup"}>Signup</Link>
-							</Menu.Item>
-							<Menu.Item key='wall'>
-								<Link to={"/wall"}>Wall</Link>
-							</Menu.Item>
-						</Menu>
-					</Header>
+					<Navbar />
 					<Content
 						style={{
 							padding: 16,
