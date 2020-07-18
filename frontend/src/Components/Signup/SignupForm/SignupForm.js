@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { handleSignUp } from "../../../Actions/userActions"
+import { Form, Input, Button } from "antd"
 const SignUpForm = props => {
 	const [state, setState] = useState({
 		name: "",
@@ -18,33 +19,41 @@ const SignUpForm = props => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
-				name={"name"}
-				type={"text"}
-				placeholder={"Enter Your name"}
-				onChange={onChange}
-			/>
-			<input
-				name={"username"}
-				type={"text"}
-				placeholder={"Enter a username"}
-				onChange={onChange}
-			/>
-			<input
-				name={"email"}
-				type={"email"}
-				placeholder={"Enter your email"}
-				onChange={onChange}
-			/>
-			<input
-				name={"password"}
-				type={"password"}
-				placeholder={"Create a password"}
-				onChange={onChange}
-			/>
-			<input type={"submit"} />
-		</form>
+		<Form onSubmit={handleSubmit} layout={"vertical"}>
+			<Form.Item name={"name"} label={"Name"}>
+				<Input
+					type={"text"}
+					placeholder={"Enter Your name"}
+					onChange={onChange}
+				/>
+			</Form.Item>
+			<Form.Item name={"username"} label={"Username"}>
+				<Input
+					type={"text"}
+					placeholder={"Enter a username"}
+					onChange={onChange}
+				/>
+			</Form.Item>
+			<Form.Item name={"email"} label={"Email"}>
+				<Input
+					type={"email"}
+					placeholder={"Enter your email"}
+					onChange={onChange}
+				/>
+			</Form.Item>
+			<Form.Item name={"password"} label={"Password"}>
+				<Input
+					type={"password"}
+					placeholder={"Create a password"}
+					onChange={onChange}
+				/>
+			</Form.Item>
+			<Form.Item>
+				<Button htmlType={"submit"} type={"primary"}>
+					Sign Up!
+				</Button>
+			</Form.Item>
+		</Form>
 	)
 }
 

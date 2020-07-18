@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import "./App.css"
+import React from "react"
+import "./App.scss"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from "./Components/Login"
 import Wall from "./Components/Wall"
