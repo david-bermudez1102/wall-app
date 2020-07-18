@@ -2,7 +2,7 @@ import { ROOT_URL } from "./rootUrl"
 import { handleErrors } from "./handleErrors"
 import { message } from "antd"
 
-const MESSAGES_URL = `${ROOT_URL}/messages`
+const MESSAGES_URL = `${ROOT_URL}/messages/`
 
 export const fethMessages = () => dispatch =>
 	fetch(MESSAGES_URL, {
@@ -28,8 +28,8 @@ export const addMessage = data => dispatch =>
 		.then(message => dispatch({ type: "ADD_MESSAGE", message }))
 		.catch(err => message.error(err.message))
 
-export const removeMessage = message => dispatch =>
-	fetch(`${MESSAGES_URL}/${message.id}`, {
+export const removeMessage = data => dispatch =>
+	fetch(`${MESSAGES_URL}${data.id}`, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
