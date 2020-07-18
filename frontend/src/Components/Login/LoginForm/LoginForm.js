@@ -7,6 +7,7 @@ const LoginForm = props => {
 			<form>
 				<input type={"text"} placeholder={"Your Username"} />
 				<input type={"password"} placeholder={"Your Password"} />
+				<input type={"submit"} />
 			</form>
 		</div>
 	)
