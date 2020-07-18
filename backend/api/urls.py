@@ -9,5 +9,7 @@ router.register(r'messages', views.MessageViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('token-auth/', obtain_jwt_token)
+    path('token-auth/', obtain_jwt_token),
+    path('current_user/', views.current_user),
+    path('users/', views.UserList.as_view())
 ]
