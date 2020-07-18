@@ -35,8 +35,9 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         fields = ('token', 'username', 'password')
 
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
-    author = UserSerializer()
+class MessageSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+    
     class Meta:
         model = Message
-        fields = ('author', 'content', 'created', 'updated')
+        fields = ('id','author', 'content', 'created', 'updated')
