@@ -1,16 +1,41 @@
 import React from "react"
 import Message from "./Message/Message"
-import { List, Row, Col, Card } from "antd"
+import { List, Row, Col, Card, Button } from "antd"
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
-import { DeleteOutlined } from "@ant-design/icons"
+import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons"
 import { removeMessage } from "../../../Actions/wallActions"
+import { Link } from "react-router-dom"
 
 const Messages = props => {
-	const { messages } = useSelector(
-		({ messages }) => ({ messages }),
+	const { messages, session } = useSelector(
+		({ messages, session }) => ({ messages, session }),
 		shallowEqual
 	)
 	const dispatch = useDispatch()
+
+	const currentUser = session || {}
+	const getActions = message => {
+		return [
+			currentUser.id === message.author.id && (
+				<Button
+					onClick={() => dispatch(removeMessage(message))}
+					shape={"circle"}
+					danger>
+					<DeleteOutlined />
+				</Button>
+			),
+			<Link to={`/wall/messages/${message.id}/edit`}>
+				<Button shape={"circle"}>
+					<EditOutlined />
+				</Button>
+			</Link>,
+			<Link to={`/wall/messages/${message.id}`}>
+				<Button shape={"circle"}>
+					<EyeOutlined />
+				</Button>
+			</Link>
+		]
+	}
 	return (
 		<Row justify={"center"} gutter={[16, 16]}>
 			<Col xxl={10} xl={11} lg={12} md={18} sm={20} xs={24}>
@@ -19,12 +44,7 @@ const Messages = props => {
 						itemLayout={"horizontal"}
 						dataSource={messages}
 						renderItem={message => (
-							<List.Item
-								actions={[
-									<DeleteOutlined
-										onClick={() => dispatch(removeMessage(message))}
-									/>
-								]}>
+							<List.Item actions={getActions(message)}>
 								<Message message={message} />
 							</List.Item>
 						)}

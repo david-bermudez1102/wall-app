@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import "./App.scss"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { Switch, Route, useLocation } from "react-router-dom"
 import Login from "./Components/Login"
 import Wall from "./Components/Wall"
 import SignUp from "./Components/Signup"
@@ -13,33 +13,33 @@ const { Content, Footer } = Layout
 
 function App() {
 	const dispatch = useDispatch()
+	const location = useLocation()
 
 	useEffect(() => {
 		dispatch(fetchSession())
-	}, [])
+	}, [location.pathname])
 
 	return (
-		<Router>
-			<Layout style={{ width: "100%", position: "relative" }}>
-				<Navbar />
-				<Content
-					style={{
-						padding: 16,
-						position: "relative",
-						width: "100%"
-					}}>
-					<Switch>
-						<Route path={"/login"} component={Login} />
-						<Route path={"/wall"} component={Wall} />
-						<Route path={"/signup"} component={SignUp} />
-						<Route path={"/logout"} component={Logout} />
-					</Switch>
-				</Content>
-				<Footer style={{ textAlign: "center" }}>
-					Wall App - Designed by David Bermudez
-				</Footer>
-			</Layout>
-		</Router>
+		<Layout style={{ minHeight: "100%", width: "100%", position: "relative" }}>
+			<Navbar />
+			<Content
+				style={{
+					minHeight: "100%",
+					padding: 16,
+					position: "relative",
+					width: "100%"
+				}}>
+				<Switch>
+					<Route path={"/login"} component={Login} />
+					<Route path={"/wall"} component={Wall} />
+					<Route path={"/signup"} component={SignUp} />
+					<Route path={"/logout"} component={Logout} />
+				</Switch>
+			</Content>
+			<Footer style={{ textAlign: "center" }}>
+				Wall App - Designed by David Bermudez
+			</Footer>
+		</Layout>
 	)
 }
 
