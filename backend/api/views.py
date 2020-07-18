@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from rest_framework import viewsets
-from .serializers import MessageSerializer, UserSerializer
+from .serializers import MessageSerializer, UserSerializer, UserSerializerWithToken
 from .models import Message
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
