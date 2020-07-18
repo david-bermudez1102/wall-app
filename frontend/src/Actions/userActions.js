@@ -1,5 +1,6 @@
 import { ROOT_URL } from "./rootUrl"
 import { handleErrors } from "./handleErrors"
+import { message } from "antd"
 
 const USERS_URL = `${ROOT_URL}/users/`
 const LOGIN_URL = `${ROOT_URL}/token-auth/`
@@ -35,7 +36,7 @@ export const handleLogin = data => dispatch =>
 				session: { isLoggedIn: true, currentUser }
 			})
 		})
-		.catch(console.log)
+		.catch(err => message.error(err.message))
 
 export const fetchSession = () => dispatch =>
 	fetch(CURRENT_USER_URL, {

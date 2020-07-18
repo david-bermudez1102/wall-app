@@ -26,7 +26,10 @@ export const addMessage = data => dispatch =>
 	})
 		.then(handleErrors)
 		.then(message => dispatch({ type: "ADD_MESSAGE", message }))
-		.catch(err => message.error(err.message))
+		.catch(err => {
+			console.log(err)
+			message.error(err.message)
+		})
 
 export const removeMessage = data => dispatch =>
 	fetch(`${MESSAGES_URL}${data.id}/`, {

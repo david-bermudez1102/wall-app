@@ -1,7 +1,14 @@
 export const handleErrors = response => {
 	if (!response.ok) {
 		return response.json().then(resp => {
-			throw new Error(`${response.status} - ${resp.detail}`)
+			console.log(resp)
+			throw new Error(
+				`${response.status} - ${
+					resp.detail ||
+					(resp.content || []).join(", ") ||
+					(resp.non_field_errors || []).join(", ")
+				}`
+			)
 		})
 	}
 
