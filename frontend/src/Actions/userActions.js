@@ -5,7 +5,7 @@ const USERS_URL = `${ROOT_URL}/users/`
 const LOGIN_URL = `${ROOT_URL}/token-auth/`
 const CURRENT_USER_URL = `${ROOT_URL}/current_user/`
 
-export const handleSignUp = data =>
+export const handleSignUp = data => dispatch =>
 	fetch(USERS_URL, {
 		method: "POST",
 		headers: {

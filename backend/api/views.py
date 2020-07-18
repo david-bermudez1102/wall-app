@@ -19,7 +19,7 @@ def current_user(request):
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all().order_by('-created')
     serializer_class = MessageSerializer
-    http_method_names = ['get', 'post', 'patch', 'destroy']
+    http_method_names = ['get', 'post', 'patch', 'delete']
     permission_classes_by_action = {'list': [permissions.AllowAny] }
 
     def perform_create(self, serializer):
@@ -28,6 +28,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         return super(MessageViewSet, self).list(request, *args, **kwargs)
+
 
     def get_permissions(self):
         try:

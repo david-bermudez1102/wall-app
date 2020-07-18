@@ -8,6 +8,7 @@ const Message = ({ message }) => {
 
 	return (
 		<Comment
+			actions={["Delete"]}
 			avatar={<Avatar />}
 			author={
 				<a>

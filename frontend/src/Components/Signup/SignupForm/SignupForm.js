@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import { handleSignUp } from "../../../Actions/userActions"
 import { Form, Input, Button } from "antd"
-import { useSelector, shallowEqual } from "react-redux"
+import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { Redirect } from "react-router-dom"
 const SignUpForm = props => {
 	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
+	const dispatch = useDispatch()
 
 	const handleSubmit = data => {
-		handleSignUp(data)
+		dispatch(handleSignUp(data))
 	}
 
 	if (session.isLoggedIn) return <Redirect to={"/wall"} />
