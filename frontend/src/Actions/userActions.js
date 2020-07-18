@@ -55,9 +55,9 @@ export const fetchSession = () => dispatch =>
 		})
 		.catch(console.log)
 
-export const handleLogout = () => dispatch => {
+export const handleLogout = () => async dispatch => {
 	localStorage.removeItem("token")
-	return dispatch({
+	return await dispatch({
 		type: "LOGOUT"
 	})
 }

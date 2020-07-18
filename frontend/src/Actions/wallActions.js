@@ -29,7 +29,7 @@ export const addMessage = data => dispatch =>
 		.catch(err => message.error(err.message))
 
 export const removeMessage = data => dispatch =>
-	fetch(`${MESSAGES_URL}${data.id}`, {
+	fetch(`${MESSAGES_URL}${data.id}/`, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const removeMessage = data => dispatch =>
 		.catch(err => message.error(err.message))
 
 export const updateMessage = data => dispatch =>
-	fetch(MESSAGES_URL, {
+	fetch(`${MESSAGES_URL}${data.id}/`, {
 		method: "PATCH",
 		headers: {
 			"Content-Type": "application/json",
@@ -50,5 +50,5 @@ export const updateMessage = data => dispatch =>
 		body: JSON.stringify(data)
 	})
 		.then(handleErrors)
-		.then(message => dispatch({ type: "ADD_MESSAGE", message }))
+		.then(message => dispatch({ type: "UPDATE_MESSAGE", message }))
 		.catch(err => message.error(err.message))
