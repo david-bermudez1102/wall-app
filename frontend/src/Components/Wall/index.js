@@ -1,19 +1,19 @@
-import React, { useContext, useEffect } from "react"
+import React, { useEffect } from "react"
 import Messages from "./Messages"
-import { Context } from "../../Store"
 import { fethMessages } from "../../Actions/wallActions"
+import { useDispatch } from "react-redux"
+import MessageFormLayout from "./Messages/Message/MessageForm/MessageFormLayout"
 
 const Wall = props => {
-	const [, dispatch] = useContext(Context)
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		fethMessages()
-			.then(messages => dispatch({ type: "SET_MESSAGES", messages }))
-			.catch(console.log)
+		dispatch(fethMessages())
 	}, [])
 
 	return (
 		<div>
+			<MessageFormLayout />
 			<Messages />
 		</div>
 	)

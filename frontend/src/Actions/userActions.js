@@ -3,6 +3,7 @@ import { handleErrors } from "./handleErrors"
 
 const USERS_URL = `${ROOT_URL}/users/`
 const LOGIN_URL = `${ROOT_URL}/token-auth/`
+const CURRENT_USER_URL = `${ROOT_URL}/current_user/`
 
 export const handleSignUp = data =>
 	fetch(USERS_URL, {
@@ -18,7 +19,7 @@ export const handleSignUp = data =>
 			console.log(json)
 		})
 
-export const handleLogin = data =>
+export const handleLogin = data => dispatch =>
 	fetch(LOGIN_URL, {
 		method: "POST",
 		headers: {
@@ -27,7 +28,37 @@ export const handleLogin = data =>
 		body: JSON.stringify(data)
 	})
 		.then(handleErrors)
-		.then(json => {
-			localStorage.setItem("token", json.token)
-			console.log(json)
+		.then(currentUser => {
+			localStorage.setItem("token", currentUser.token)
+			dispatch({
+				type: "SET_SESSION",
+				session: { isLoggedIn: true, currentUser }
+			})
 		})
+		.catch(console.log)
+
+export const fetchSession = () => dispatch =>
+	fetch(CURRENT_USER_URL, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+
+			Authorization: `JWT ${localStorage.getItem("token")}`
+		}
+	})
+		.then(handleErrors)
+		.then(currentUser => {
+			localStorage.setItem("token", currentUser.token)
+			dispatch({
+				type: "SET_SESSION",
+				session: { isLoggedIn: true, currentUser }
+			})
+		})
+		.catch(console.log)
+
+export const handleLogout = () => dispatch => {
+	localStorage.removeItem("token")
+	dispatch({
+		type: "LOGOUT"
+	})
+}

@@ -17,6 +17,9 @@ const Navbar = () => {
 				<Menu.Item key='/wall'>
 					<Link to={"/wall"}>Wall</Link>
 				</Menu.Item>
+				<Menu.Item key='/logout'>
+					<Link to={"/logout"}>Logout</Link>
+				</Menu.Item>
 			</Menu>
 		</Header>
 	)

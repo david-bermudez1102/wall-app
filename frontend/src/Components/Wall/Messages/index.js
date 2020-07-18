@@ -1,16 +1,24 @@
 import React, { useContext } from "react"
-import { Context } from "../../../Store"
 import Message from "./Message/Message"
-import { List } from "antd"
+import { List, Row, Col, Card } from "antd"
+import { useSelector, shallowEqual } from "react-redux"
 
 const Messages = props => {
-	const [state, dispatch] = useContext(Context)
-	const { messages } = state
+	const { messages } = useSelector(
+		({ messages }) => ({ messages }),
+		shallowEqual
+	)
 	return (
-		<List
-			dataSource={messages}
-			renderItem={message => <Message message={message} />}
-		/>
+		<Row justify={"center"} gutter={[16, 16]}>
+			<Col span={8}>
+				<Card size={"small"} bordered={false} title={"Wall Messages"}>
+					<List
+						dataSource={messages}
+						renderItem={message => <Message message={message} />}
+					/>
+				</Card>
+			</Col>
+		</Row>
 	)
 }
 

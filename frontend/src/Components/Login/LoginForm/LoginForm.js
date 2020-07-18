@@ -1,21 +1,13 @@
 import React, { useContext } from "react"
 import { Form, Input, Button } from "antd"
 import { handleLogin } from "../../../Actions/userActions"
-import { Context } from "../../../Store"
+import { useDispatch } from "react-redux"
 
 const LoginForm = props => {
-	const [, dispatch] = useContext(Context)
+	const dispatch = useDispatch()
 
 	const onFinish = data => {
-		handleLogin(data)
-			.then(currentUser => {
-				localStorage.setItem("token", currentUser.token)
-				dispatch({
-					type: "SET_SESSION",
-					session: { isLoggedIn: true, currentUser }
-				})
-			})
-			.catch(console.log)
+		dispatch(handleLogin(data))
 	}
 
 	return (

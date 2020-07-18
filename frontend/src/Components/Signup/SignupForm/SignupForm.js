@@ -1,7 +1,10 @@
 import React, { useState } from "react"
 import { handleSignUp } from "../../../Actions/userActions"
 import { Form, Input, Button } from "antd"
+import { useSelector, shallowEqual } from "react-redux"
+import { Redirect } from "react-router-dom"
 const SignUpForm = props => {
+	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
 	const [state, setState] = useState({
 		name: "",
 		username: "",
@@ -17,6 +20,8 @@ const SignUpForm = props => {
 		e.preventDefault()
 		handleSignUp(state)
 	}
+
+	if (session.isLoggedIn) return <Redirect to={"/wall"} />
 
 	return (
 		<Form onSubmit={handleSubmit} layout={"vertical"}>

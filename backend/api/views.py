@@ -17,7 +17,7 @@ def current_user(request):
 
 
 class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Message.objects.all()
+    queryset = Message.objects.all().order_by('-created')
     serializer_class = MessageSerializer
     http_method_names = ['get', 'post', 'patch', 'destroy']
     permission_classes_by_action = {'list': [permissions.AllowAny] }
