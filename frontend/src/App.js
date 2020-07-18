@@ -8,6 +8,7 @@ import { Layout } from "antd"
 import Navbar from "./Components/Navbar"
 import { useDispatch } from "react-redux"
 import { fetchSession } from "./Actions/userActions"
+import Logout from "./Components/Logout"
 const { Content, Footer } = Layout
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 						<Route path={"/login"} component={Login} />
 						<Route path={"/wall"} component={Wall} />
 						<Route path={"/signup"} component={SignUp} />
+						<Route path={"/logout"} component={Logout} />
 					</Switch>
 				</Content>
 				<Footer style={{ textAlign: "center" }}>

@@ -48,7 +48,6 @@ export const fetchSession = () => dispatch =>
 	})
 		.then(handleErrors)
 		.then(currentUser => {
-			localStorage.setItem("token", currentUser.token)
 			dispatch({
 				type: "SET_SESSION",
 				session: { isLoggedIn: true, currentUser }
@@ -58,7 +57,7 @@ export const fetchSession = () => dispatch =>
 
 export const handleLogout = () => dispatch => {
 	localStorage.removeItem("token")
-	dispatch({
+	return dispatch({
 		type: "LOGOUT"
 	})
 }

@@ -14,7 +14,11 @@ const Messages = props => {
 				<Card size={"small"} bordered={false} title={"Wall Messages"}>
 					<List
 						dataSource={messages}
-						renderItem={message => <Message message={message} />}
+						renderItem={message => (
+							<List.Item>
+								<Message message={message} />
+							</List.Item>
+						)}
 					/>
 				</Card>
 			</Col>
