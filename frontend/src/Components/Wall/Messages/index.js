@@ -10,7 +10,7 @@ const Messages = props => {
 	)
 	return (
 		<Row justify={"center"} gutter={[16, 16]}>
-			<Col span={8}>
+			<Col xxl={10} xl={11} lg={12} md={18} sm={20} xs={24}>
 				<Card size={"small"} bordered={false} title={"Wall Messages"}>
 					<List
 						dataSource={messages}
