@@ -18,6 +18,7 @@ const Messages = props => {
 		return [
 			currentUser.id === message.author.id && (
 				<Button
+					size={"small"}
 					onClick={() => dispatch(removeMessage(message))}
 					shape={"circle"}
 					danger>
@@ -25,16 +26,16 @@ const Messages = props => {
 				</Button>
 			),
 			<Link to={`/wall/messages/${message.id}/edit`}>
-				<Button shape={"circle"}>
+				<Button shape={"circle"} size={"small"}>
 					<EditOutlined />
 				</Button>
 			</Link>,
 			<Link to={`/wall/messages/${message.id}`}>
-				<Button shape={"circle"}>
+				<Button shape={"circle"} size={"small"}>
 					<EyeOutlined />
 				</Button>
 			</Link>
-		]
+		].filter(link => link)
 	}
 	return (
 		<Row justify={"center"} gutter={[16, 16]}>

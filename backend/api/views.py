@@ -23,7 +23,6 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
     permission_classes = (OwnProfilePermission,)
-  
 
     def perform_create(self, serializer):
      serializer.save(author=self.request.user)

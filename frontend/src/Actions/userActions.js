@@ -19,6 +19,7 @@ export const handleSignUp = data => dispatch =>
 			localStorage.setItem("token", json.token)
 			console.log(json)
 		})
+		.catch(err => message.error(err.message))
 
 export const handleLogin = data => dispatch =>
 	fetch(LOGIN_URL, {
@@ -54,7 +55,9 @@ export const fetchSession = () => dispatch =>
 				session: { isLoggedIn: true, currentUser }
 			})
 		})
-		.catch(console.log)
+		.catch(() => {
+			localStorage.removeItem("token")
+		})
 
 export const handleLogout = () => async dispatch => {
 	localStorage.removeItem("token")

@@ -15,7 +15,7 @@ const SignUpForm = props => {
 
 	return (
 		<Form onFinish={handleSubmit} layout={"vertical"}>
-			<Form.Item name={"first_name"} label={"Name"}>
+			<Form.Item name={"first_name"} label={"First name"}>
 				<Input type={"text"} placeholder={"Enter Your First Name"} />
 			</Form.Item>
 			<Form.Item name={"last_name"} label={"Lastname"}>

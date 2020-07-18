@@ -141,7 +141,5 @@ CORS_ORIGIN_WHITELIST = (
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'backend.utils.custom_jwt_response_handler',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=1),  # Token expires * minutes after being issued
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(minutes=5),
+    
 }

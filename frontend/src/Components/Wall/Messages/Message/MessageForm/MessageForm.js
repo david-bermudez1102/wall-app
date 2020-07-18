@@ -11,7 +11,7 @@ const MessageForm = ({ message }) => {
 	const onFinish = data => {
 		if (!message) dispatch(addMessage(data)).then(() => form.resetFields())
 		// if no message passed, post
-		else dispatch(updateMessage({ id: message.id, data })) // else, patch
+		else dispatch(updateMessage({ id: message.id, ...data })) // else, patch
 	}
 
 	useEffect(() => {
