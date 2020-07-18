@@ -1,5 +1,6 @@
 import { ROOT_URL } from "./rootUrl"
 import { handleErrors } from "./handleErrors"
+import { message } from "antd"
 
 const MESSAGES_URL = `${ROOT_URL}/messages/`
 
@@ -26,4 +27,4 @@ export const addMessage = data => dispatch =>
 	})
 		.then(handleErrors)
 		.then(message => dispatch({ type: "ADD_MESSAGE", message }))
-		.catch(console.log)
+		.catch(err => message.error(err.message))
