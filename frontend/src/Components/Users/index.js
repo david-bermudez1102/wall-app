@@ -14,7 +14,6 @@ const Users = props => {
 		if (session.isLoggedIn) dispatch(fetchUsers())
 	}, [location.pathname, session])
 
-	console.log(match.path)
 	return (
 		<Switch>
 			<Route path={`${match.path}/:username`} component={UserShow} />

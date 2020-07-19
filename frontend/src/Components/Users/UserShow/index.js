@@ -16,6 +16,8 @@ const UserShow = () => {
 		shallowEqual
 	)
 
+	const currentUser = session.currentUser || {}
+
 	const user = users.find(u => u.username === username)
 	const { first_name, last_name, email } = user || {}
 	const userMessages = messages.filter(m => m.user.id === (user || {}).id)
@@ -33,6 +35,7 @@ const UserShow = () => {
 									<Title level={3}>
 										<Avatar icon={<UserOutlined />} />
 										{first_name} {last_name} @{username}
+										{currentUser.id === user.id && <> (Me)</>}
 									</Title>
 								}>
 								<DescriptionsItem label='Email'>{email}</DescriptionsItem>

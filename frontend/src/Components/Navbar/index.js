@@ -22,7 +22,13 @@ const Navbar = () => {
 				))}
 				<Menu.Item key={0} style={{ float: "right" }}>
 					<Avatar icon={<UserOutlined />} style={{ marginRight: 10 }} />
-					{currentUser ? <>Welcome @{username}</> : <>Welcome, anonymous</>}
+					{currentUser ? (
+						<Link to={`/users/${currentUser.username}`}>
+							Welcome @{username}
+						</Link>
+					) : (
+						<>Welcome, anonymous</>
+					)}
 				</Menu.Item>
 			</Menu>
 		</Header>

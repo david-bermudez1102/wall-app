@@ -27,9 +27,9 @@ const Message = ({ message }) => {
 				<Tooltip
 					title={
 						<>
-							Created: {format(new Date(created), "PPPppp")}
+							Created: {format(new Date(created), "PPPp")}
 							<br />
-							Updated: {format(new Date(updated), "PPPppp")}
+							Updated: {format(new Date(updated), "PPPp")}
 						</>
 					}>
 					{formatDistance(new Date(created), new Date(), {
