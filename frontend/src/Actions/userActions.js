@@ -15,9 +15,16 @@ export const handleSignUp = data => dispatch =>
 		body: JSON.stringify(data)
 	})
 		.then(handleErrors)
-		.then(json => {
-			localStorage.setItem("token", json.token)
-			console.log(json)
+		.then(currentUser => {
+			localStorage.setItem("token", currentUser.token)
+			dispatch({
+				type: "SET_SESSION",
+				session: { isLoggedIn: true, currentUser }
+			})
+			message.success(
+				`Welcome to wall App ${currentUser.first_name}. We've sent you a confirmation email`,
+				6000
+			)
 		})
 		.catch(err => message.error(err.message))
 

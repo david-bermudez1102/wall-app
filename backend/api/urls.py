@@ -1,10 +1,17 @@
 from django.urls import include, path
-from rest_framework import routers
+from rest_framework.routers import DefaultRouter
+from rest_framework_extensions.routers import NestedRouterMixin
 from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 
-router = routers.DefaultRouter()
-router.register(r'messages', views.MessageViewSet)
+class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
+    pass
+
+
+router = NestedDefaultRouter()
+messages_router = router.register(r'messages', views.MessageViewSet)
+messages_router.register(r'replies', views.ReplyViewSet, basename='message-replies', parents_query_lookups=['message'])
+
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from rest_framework import viewsets, generics
-from .serializers import MessageSerializer, UserSerializer, UserSerializerWithToken
-from .models import Message
+from .serializers import MessageSerializer, UserSerializer, UserSerializerWithToken, ReplySerializer
+from .models import Message, Reply
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
@@ -10,6 +10,8 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from .permissions import OwnProfilePermission, CustomUsersPermissions
 from django.core.mail import send_mail
+from rest_framework_extensions.mixins import NestedViewSetMixin
+
 
 
 # Create your views here.
@@ -19,7 +21,7 @@ def current_user(request):
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
-class MessageViewSet(viewsets.ModelViewSet):
+class MessageViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Message.objects.all().order_by('-created')
     serializer_class = MessageSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
@@ -29,7 +31,16 @@ class MessageViewSet(viewsets.ModelViewSet):
      serializer.save(user=self.request.user)
      return Response(serializer.data)
 
-    
+class ReplyViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Reply.objects.all().order_by('-created')
+    serializer_class = ReplySerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']
+    permission_classes = (OwnProfilePermission,)
+
+    def perform_create(self, serializer):
+     serializer.save(user=self.request.user)
+     return Response(serializer.data)
+
 class UserList(APIView):
     permission_classes = (CustomUsersPermissions,)
 
@@ -45,7 +56,7 @@ class UserList(APIView):
              'Welcome to wall app',
              'Welcome to wall app! Now you can start posting new messages!',
              'master@wallapp.com',
-             [request.data.email],
+             [request.data["email"]],
              fail_silently=True,
             ) ## Failing silently in development
             return Response(serializer.data, status=status.HTTP_201_CREATED)

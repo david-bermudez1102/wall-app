@@ -32,7 +32,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'password', 'first_name', 'last_name')
+        fields = ('token', 'username', 'email', 'password', 'first_name', 'last_name')
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -41,3 +41,10 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ('id','user', 'content', 'created', 'updated')
+        
+class ReplySerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    
+    class Meta:
+        model = Message
+        fields = ('id','user', 'message_id', 'content', 'created', 'updated')
