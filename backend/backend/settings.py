@@ -140,6 +140,5 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'backend.utils.custom_jwt_response_handler',
-    
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'backend.utils.custom_jwt_response_handler'
 }
