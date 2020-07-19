@@ -22,7 +22,7 @@ const Messages = props => {
 	const currentUser = session.currentUser || {}
 	const getActions = message => {
 		return [
-			currentUser.id === parseInt(message.author.id) && (
+			currentUser.id === parseInt(message.user.id) && (
 				<Button
 					size={"small"}
 					style={{ border: 0 }}
@@ -31,7 +31,7 @@ const Messages = props => {
 					<DeleteOutlined />
 				</Button>
 			),
-			currentUser.id === parseInt(message.author.id) && (
+			currentUser.id === parseInt(message.user.id) && (
 				<Link to={`/wall/messages/${message.id}/edit`}>
 					<Button style={{ border: 0 }} size={"small"}>
 						<EditOutlined />

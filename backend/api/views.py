@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
-from .permissions import OwnProfilePermission
+from .permissions import OwnProfilePermission, CustomUsersPermissions
 from django.core.mail import send_mail
 
 
@@ -26,12 +26,16 @@ class MessageViewSet(viewsets.ModelViewSet):
     permission_classes = (OwnProfilePermission,)
 
     def perform_create(self, serializer):
-     serializer.save(author=self.request.user)
+     serializer.save(user=self.request.user)
      return Response(serializer.data)
 
     
 class UserList(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (CustomUsersPermissions,)
+
+    def get(self, request, format=None):
+        serialized_data = UserSerializer(User.objects.all(), many=True)
+        return Response(serialized_data.data, status=200)
 
     def post(self, request, format=None):
         serializer = UserSerializerWithToken(data=request.data)

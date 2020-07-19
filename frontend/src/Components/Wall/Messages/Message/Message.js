@@ -6,14 +6,14 @@ import { Link } from "react-router-dom"
 import { format } from "date-fns"
 
 const Message = ({ message }) => {
-	const { author, content, created, updated } = message
-	const { id, username, first_name, last_name } = author
+	const { user, content, created, updated } = message
+	const { id, username, first_name, last_name } = user
 
 	return (
 		<Comment
 			avatar={<Avatar icon={<UserOutlined />} />}
 			author={
-				<Link to={`/users/${id}`}>
+				<Link to={`/users/${username}`}>
 					{first_name} {last_name} @{username}
 				</Link>
 			}

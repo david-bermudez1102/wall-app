@@ -17,8 +17,8 @@ const MessageShow = () => {
 
 	const { messageId } = match.params
 	const message = messages.find(m => m.id === parseInt(messageId))
-	const { author, content, created, updated } = message || {}
-	const { username, first_name, last_name } = author || {}
+	const { user, content, created, updated } = message || {}
+	const { username, first_name, last_name } = user || {}
 	const [visible, setVisible] = useState(true)
 
 	const onClose = () => {
@@ -34,11 +34,11 @@ const MessageShow = () => {
 			onClose={onClose}
 			visible={visible}
 			afterVisibleChange={visible => (!visible ? history.push("/wall") : null)}>
-			{currentUser.id === author.id && <MessageForm message={message} />}
+			{currentUser.id === user.id && <MessageForm message={message} />}
 			<Comment
 				avatar={<Avatar />}
 				author={
-					<Link to={`/users/${author.id}`}>
+					<Link to={`/users/${user.id}`}>
 						{first_name} {last_name} @{username}
 					</Link>
 				}

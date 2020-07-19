@@ -9,6 +9,7 @@ import Navbar from "./Components/Navbar"
 import { useDispatch } from "react-redux"
 import { fetchSession } from "./Actions/userActions"
 import Logout from "./Components/Logout"
+import Users from "./Components/Users"
 const { Content, Footer } = Layout
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 					<Route path={"/login"} component={Login} />
 					<Route path={"/wall"} component={Wall} />
 					<Route path={"/signup"} component={SignUp} />
+					<Route path={"/users"} component={Users} />
 					<Route path={"/logout"} component={Logout} />
 				</Switch>
 			</Content>

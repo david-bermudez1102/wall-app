@@ -65,3 +65,19 @@ export const handleLogout = () => async dispatch => {
 		type: "LOGOUT"
 	})
 }
+
+export const fetchUsers = () => dispatch =>
+	fetch(CURRENT_USER_URL, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `JWT ${localStorage.getItem("token")}`
+		}
+	})
+		.then(handleErrors)
+		.then(users => {
+			dispatch({
+				type: "SET_USERS",
+				users
+			})
+		})
