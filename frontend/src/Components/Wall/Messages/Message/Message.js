@@ -4,10 +4,14 @@ import formatDistance from "date-fns/formatDistance"
 import { UserOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
 import { format } from "date-fns"
+import { useSelector, shallowEqual } from "react-redux"
 
 const Message = ({ message }) => {
+	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
+	const currentUser = session.currentUser || {}
+
 	const { user, content, created, updated } = message
-	const { id, username, first_name, last_name } = user
+	const { username, first_name, last_name } = user
 
 	return (
 		<Comment
@@ -15,6 +19,7 @@ const Message = ({ message }) => {
 			author={
 				<Link to={`/users/${username}`}>
 					{first_name} {last_name} @{username}
+					{currentUser.id === user.id && <> (Me)</>}
 				</Link>
 			}
 			content={content}

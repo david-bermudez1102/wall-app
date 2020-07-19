@@ -16,7 +16,7 @@ const Navbar = () => {
 		<Header>
 			<Menu theme='dark' mode='horizontal' selectedKeys={[location.pathname]}>
 				{links.map(link => (
-					<Menu.Item key={link.to}>
+					<Menu.Item key={link.to} icon={link.icon}>
 						<Link to={link.to}>{link.label}</Link>
 					</Menu.Item>
 				))}

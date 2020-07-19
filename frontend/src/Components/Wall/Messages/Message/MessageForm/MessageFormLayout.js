@@ -1,10 +1,10 @@
 import React from "react"
-import { Row, Col, Card, Button } from "antd"
+import { Row, Col, Card } from "antd"
 import MessageForm from "./MessageForm"
 import { useSelector, shallowEqual } from "react-redux"
-import { Link } from "react-router-dom"
 import Title from "antd/lib/typography/Title"
 import { PlusOutlined } from "@ant-design/icons"
+import LoginOrSignupMessage from "../../../../Signup/LoginOrSignUpMessage"
 
 const MessageFormLayout = () => {
 	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
@@ -22,23 +22,7 @@ const MessageFormLayout = () => {
 							description={<MessageForm />}
 						/>
 					) : (
-						<Card.Meta
-							title={
-								<div style={{ textAlign: "center", width: "100%" }}>
-									Login or Signup to post a message on the wall!
-								</div>
-							}
-							description={
-								<div style={{ textAlign: "center", width: "100%" }}>
-									<Link to={"/login"}>
-										<Button style={{ marginRight: 16 }}>Login</Button>
-									</Link>
-									<Link to={"/signup"}>
-										<Button>Signup</Button>
-									</Link>
-								</div>
-							}
-						/>
+						<LoginOrSignupMessage />
 					)}
 				</Card>
 			</Col>

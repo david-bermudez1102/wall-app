@@ -67,7 +67,7 @@ export const handleLogout = () => async dispatch => {
 }
 
 export const fetchUsers = () => dispatch =>
-	fetch(CURRENT_USER_URL, {
+	fetch(USERS_URL, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -75,9 +75,10 @@ export const fetchUsers = () => dispatch =>
 		}
 	})
 		.then(handleErrors)
-		.then(users => {
+		.then(users =>
 			dispatch({
 				type: "SET_USERS",
 				users
 			})
-		})
+		)
+		.catch(err => message.error(err.message))

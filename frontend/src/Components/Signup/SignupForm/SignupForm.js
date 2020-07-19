@@ -3,6 +3,7 @@ import { handleSignUp } from "../../../Actions/userActions"
 import { Form, Input, Button } from "antd"
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { Redirect } from "react-router-dom"
+import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons"
 
 const SignUpForm = props => {
 	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
@@ -24,7 +25,11 @@ const SignUpForm = props => {
 						required: true
 					}
 				]}>
-				<Input type={"text"} placeholder={"Enter Your First Name"} />
+				<Input
+					prefix={<UserOutlined />}
+					type={"text"}
+					placeholder={"Enter Your First Name"}
+				/>
 			</Form.Item>
 			<Form.Item
 				name={"last_name"}
@@ -34,7 +39,11 @@ const SignUpForm = props => {
 						required: true
 					}
 				]}>
-				<Input type={"text"} placeholder={"Enter Your Lastname"} />
+				<Input
+					prefix={<UserOutlined />}
+					type={"text"}
+					placeholder={"Enter Your Lastname"}
+				/>
 			</Form.Item>
 			<Form.Item
 				name={"username"}
@@ -44,7 +53,11 @@ const SignUpForm = props => {
 						required: true
 					}
 				]}>
-				<Input type={"text"} placeholder={"Enter a username"} />
+				<Input
+					prefix={<UserOutlined />}
+					type={"text"}
+					placeholder={"Enter a username"}
+				/>
 			</Form.Item>
 			<Form.Item
 				name={"email"}
@@ -54,7 +67,11 @@ const SignUpForm = props => {
 						required: true
 					}
 				]}>
-				<Input type={"email"} placeholder={"Enter your email"} />
+				<Input
+					prefix={<MailOutlined />}
+					type={"email"}
+					placeholder={"Enter your email"}
+				/>
 			</Form.Item>
 			<Form.Item
 				name={"password"}
@@ -64,10 +81,14 @@ const SignUpForm = props => {
 						required: true
 					}
 				]}>
-				<Input type={"password"} placeholder={"Create a password"} />
+				<Input
+					prefix={<LockOutlined />}
+					type={"password"}
+					placeholder={"Create a password"}
+				/>
 			</Form.Item>
 			<Form.Item>
-				<Button htmlType={"submit"} type={"primary"}>
+				<Button htmlType={"submit"} type={"primary"} size={"large"} block>
 					Sign Up!
 				</Button>
 			</Form.Item>

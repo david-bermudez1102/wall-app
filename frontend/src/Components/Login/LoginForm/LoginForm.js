@@ -2,6 +2,7 @@ import React from "react"
 import { Form, Input, Button } from "antd"
 import { handleLogin } from "../../../Actions/userActions"
 import { useDispatch } from "react-redux"
+import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
 const LoginForm = props => {
 	const dispatch = useDispatch()
@@ -11,7 +12,7 @@ const LoginForm = props => {
 	}
 
 	return (
-		<Form onFinish={onFinish} layout={"vertical"}>
+		<Form onFinish={onFinish} layout={"vertical"} size={"large"}>
 			<Form.Item
 				name={"username"}
 				label={"Username"}
@@ -21,7 +22,11 @@ const LoginForm = props => {
 						message: "Enter your username."
 					}
 				]}>
-				<Input type={"text"} placeholder={"Your Username"} />
+				<Input
+					prefix={<UserOutlined />}
+					type={"text"}
+					placeholder={"Your Username"}
+				/>
 			</Form.Item>
 			<Form.Item
 				name={"password"}
@@ -32,10 +37,14 @@ const LoginForm = props => {
 						message: "Enter your password."
 					}
 				]}>
-				<Input type={"password"} placeholder={"Your Password"} />
+				<Input
+					prefix={<LockOutlined />}
+					type={"password"}
+					placeholder={"Your Password"}
+				/>
 			</Form.Item>
 			<Form.Item>
-				<Button htmlType={"submit"} type={"primary"} block>
+				<Button htmlType={"submit"} type={"primary"} block size={"large"}>
 					Login
 				</Button>
 			</Form.Item>

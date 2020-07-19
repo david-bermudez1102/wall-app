@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux"
 import { fetchSession } from "./Actions/userActions"
 import Logout from "./Components/Logout"
 import Users from "./Components/Users"
+import { fethMessages } from "./Actions/wallActions"
+import Home from "./Home"
 const { Content, Footer } = Layout
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(fetchSession())
+		dispatch(fethMessages())
 		// eslint-disable-next-line
 	}, [location.pathname])
 
@@ -37,6 +40,7 @@ function App() {
 					<Route path={"/signup"} component={SignUp} />
 					<Route path={"/users"} component={Users} />
 					<Route path={"/logout"} component={Logout} />
+					<Route path={"/"} component={Home} />
 				</Switch>
 			</Content>
 			<Footer style={{ textAlign: "center" }}>

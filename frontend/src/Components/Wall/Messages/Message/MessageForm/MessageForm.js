@@ -20,7 +20,7 @@ const MessageForm = ({ message }) => {
 	}, [message])
 
 	return (
-		<Form layout={"vertical"} onFinish={onFinish} form={form}>
+		<Form layout={"vertical"} onFinish={onFinish} form={form} size={"large"}>
 			<Form.Item name={"content"}>
 				<TextArea placeholder={"What would you like to post on the wall?"} />
 			</Form.Item>

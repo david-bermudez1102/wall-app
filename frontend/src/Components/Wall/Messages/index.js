@@ -12,7 +12,7 @@ import { removeMessage } from "../../../Actions/wallActions"
 import { Link } from "react-router-dom"
 import Title from "antd/lib/typography/Title"
 
-const Messages = props => {
+const Messages = ({ userMessages, user }) => {
 	const { messages, session } = useSelector(
 		({ messages, session }) => ({ messages, session }),
 		shallowEqual
@@ -45,6 +45,7 @@ const Messages = props => {
 			</Link>
 		].filter(link => link)
 	}
+
 	return (
 		<Row justify={"center"} gutter={[16, 16]}>
 			<Col xxl={10} xl={11} lg={12} md={18} sm={20} xs={24}>
@@ -53,12 +54,17 @@ const Messages = props => {
 					bordered={false}
 					title={
 						<Title level={3}>
-							<AppstoreOutlined /> Wall Messages
+							<AppstoreOutlined />{" "}
+							{!userMessages ? (
+								<>Wall Messages</>
+							) : (
+								<>@{user.username} messages posted on the wall</>
+							)}
 						</Title>
 					}>
 					<List
 						itemLayout={"horizontal"}
-						dataSource={messages}
+						dataSource={userMessages || messages}
 						renderItem={message => (
 							<List.Item actions={getActions(message)}>
 								<Message message={message} />
