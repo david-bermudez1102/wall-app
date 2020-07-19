@@ -12,6 +12,7 @@ const Users = props => {
 
 	useEffect(() => {
 		if (session.isLoggedIn) dispatch(fetchUsers())
+		// eslint-disable-next-line
 	}, [location.pathname, session])
 
 	return (

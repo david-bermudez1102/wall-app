@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Result, Drawer } from "antd"
-import { useRouteMatch, useHistory, Link } from "react-router-dom"
+import { useRouteMatch, useHistory } from "react-router-dom"
 import { useSelector, shallowEqual } from "react-redux"
 import MessageForm from "../MessageForm/MessageForm"
 import Message from "../Message"

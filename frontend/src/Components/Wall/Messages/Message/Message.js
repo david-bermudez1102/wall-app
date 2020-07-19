@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Comment, Avatar, Tooltip } from "antd"
 import formatDistance from "date-fns/formatDistance"
 import { UserOutlined } from "@ant-design/icons"
@@ -12,6 +12,16 @@ const Message = ({ message }) => {
 
 	const { user, content, created, updated } = message
 	const { username, first_name, last_name } = user
+
+	const [currentDate, setCurrentDate] = useState(new Date())
+	const timerId = useRef() // Used to handle time distance change
+
+	useEffect(() => {
+		timerId.current = setInterval(() => setCurrentDate(new Date()), 2000)
+		return () => {
+			clearInterval(timerId.current)
+		}
+	}, [])
 
 	return (
 		<Comment
@@ -32,7 +42,7 @@ const Message = ({ message }) => {
 							Updated: {format(new Date(updated), "PPPp")}
 						</>
 					}>
-					{formatDistance(new Date(created), new Date(), {
+					{formatDistance(new Date(created), currentDate, {
 						addSuffix: true
 					})}
 				</Tooltip>
