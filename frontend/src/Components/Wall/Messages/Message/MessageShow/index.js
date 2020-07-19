@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import { Comment, Avatar, Empty, Result, Drawer } from "antd"
+import { Comment, Avatar, Result, Drawer } from "antd"
 import formatDistance from "date-fns/formatDistance"
-import { useRouteMatch, useHistory } from "react-router-dom"
+import { useRouteMatch, useHistory, Link } from "react-router-dom"
 import { useSelector, shallowEqual } from "react-redux"
-import Message from "../Message"
 import MessageForm from "../MessageForm/MessageForm"
 
 const MessageShow = () => {
@@ -11,6 +10,8 @@ const MessageShow = () => {
 		({ messages, session }) => ({ messages, session }),
 		shallowEqual
 	)
+
+	const currentUser = session.currentUser || {}
 	const match = useRouteMatch()
 	const history = useHistory()
 
@@ -24,6 +25,8 @@ const MessageShow = () => {
 		setVisible(false)
 	}
 
+	console.log(currentUser)
+
 	if (!message) return <Result status={"404"} />
 	return (
 		<Drawer
@@ -33,13 +36,13 @@ const MessageShow = () => {
 			onClose={onClose}
 			visible={visible}
 			afterVisibleChange={visible => (!visible ? history.push("/wall") : null)}>
-			<MessageForm message={message} />
+			{currentUser.id === author.id && <MessageForm message={message} />}
 			<Comment
 				avatar={<Avatar />}
 				author={
-					<a>
+					<Link to={`/users/${author.id}`}>
 						{first_name} {last_name} @{username}
-					</a>
+					</Link>
 				}
 				content={content}
 				datetime={formatDistance(new Date(created), new Date(), {

@@ -19,19 +19,21 @@ const Messages = props => {
 			currentUser.id === message.author.id && (
 				<Button
 					size={"small"}
+					style={{ border: 0 }}
 					onClick={() => dispatch(removeMessage(message))}
-					shape={"circle"}
 					danger>
 					<DeleteOutlined />
 				</Button>
 			),
-			<Link to={`/wall/messages/${message.id}/edit`}>
-				<Button shape={"circle"} size={"small"}>
-					<EditOutlined />
-				</Button>
-			</Link>,
+			currentUser.id === message.author.id && (
+				<Link to={`/wall/messages/${message.id}/edit`}>
+					<Button style={{ border: 0 }} size={"small"}>
+						<EditOutlined />
+					</Button>
+				</Link>
+			),
 			<Link to={`/wall/messages/${message.id}`}>
-				<Button shape={"circle"} size={"small"}>
+				<Button style={{ border: 0 }} size={"small"}>
 					<EyeOutlined />
 				</Button>
 			</Link>

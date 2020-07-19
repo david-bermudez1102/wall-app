@@ -15,6 +15,7 @@ const Logout = () => {
 				.then(() => history.push("/"))
 				.then(() => message.success("You've succesfully logged out."))
 		else history.push("/")
+		// eslint-disable-next-line
 	}, [])
 
 	return null

@@ -11,15 +11,31 @@ const LoginForm = props => {
 	}
 
 	return (
-		<Form onFinish={onFinish}>
-			<Form.Item name={"username"}>
+		<Form onFinish={onFinish} layout={"vertical"}>
+			<Form.Item
+				name={"username"}
+				label={"Username"}
+				rules={[
+					{
+						required: true,
+						message: "Enter your username."
+					}
+				]}>
 				<Input type={"text"} placeholder={"Your Username"} />
 			</Form.Item>
-			<Form.Item name={"password"}>
+			<Form.Item
+				name={"password"}
+				label={"Password"}
+				rules={[
+					{
+						required: true,
+						message: "Enter your password."
+					}
+				]}>
 				<Input type={"password"} placeholder={"Your Password"} />
 			</Form.Item>
 			<Form.Item>
-				<Button htmlType={"submit"} type={"primary"}>
+				<Button htmlType={"submit"} type={"primary"} block>
 					Login
 				</Button>
 			</Form.Item>

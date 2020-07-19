@@ -4,8 +4,7 @@ from rest_framework.test import APIClient
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from .models import Message
-from .views import MessageViewSet
-from django.urls import reverse
+
 # Create your tests here.
 class MessageTest(TestCase):
     """ Test module for Message model """
@@ -67,6 +66,13 @@ class ViewTestCase(TestCase):
         
         jane_doe_message_data = { 'content':'I wanna change you!' }
         response = self.jane_doe_client.patch("/api/messages/1/", jane_doe_message_data, format="json")
+        self.assertEqual(response.status_code, 403)
+
+    def test_api_only_owner_can_delete_message(self):
+        """Test Only the content owner can delete the message."""
+        Message.objects.create(author=self.jon_doe, content="I am the original content.")
+
+        response = self.jane_doe_client.delete("/api/messages/1/")
         self.assertEqual(response.status_code, 403)
     
    

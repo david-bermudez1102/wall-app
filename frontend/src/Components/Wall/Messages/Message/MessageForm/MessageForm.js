@@ -16,6 +16,7 @@ const MessageForm = ({ message }) => {
 
 	useEffect(() => {
 		form.setFieldsValue(message)
+		// eslint-disable-next-line
 	}, [message])
 
 	return (

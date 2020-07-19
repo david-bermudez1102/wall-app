@@ -17,6 +17,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(fetchSession())
+		// eslint-disable-next-line
 	}, [location.pathname])
 
 	return (
