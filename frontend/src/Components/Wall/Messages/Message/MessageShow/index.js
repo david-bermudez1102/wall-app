@@ -34,7 +34,11 @@ const MessageShow = () => {
 			visible={visible}
 			afterVisibleChange={visible => (!visible ? history.push("/wall") : null)}>
 			{currentUser.id === user.id && <MessageForm message={message} />}
-			<Message message={message} />
+			<Message message={message}>
+				{message.replies.map(reply => (
+					<Message message={reply} key={`message_show_reply_${reply.id}`} />
+				))}
+			</Message>
 		</Drawer>
 	)
 }
