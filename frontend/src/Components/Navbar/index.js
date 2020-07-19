@@ -11,7 +11,7 @@ const Navbar = () => {
 	const links = useLinks()
 	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
 	const { currentUser } = session
-	const { first_name } = currentUser || {}
+	const { username } = currentUser || {}
 	return (
 		<Header>
 			<Menu theme='dark' mode='horizontal' selectedKeys={[location.pathname]}>
@@ -22,7 +22,7 @@ const Navbar = () => {
 				))}
 				<Menu.Item key={0} style={{ float: "right" }}>
 					<Avatar icon={<UserOutlined />} style={{ marginRight: 10 }} />
-					{currentUser ? <>Welcome {first_name}</> : <>Welcome, anonymous</>}
+					{currentUser ? <>Welcome @{username}</> : <>Welcome, anonymous</>}
 				</Menu.Item>
 			</Menu>
 		</Header>

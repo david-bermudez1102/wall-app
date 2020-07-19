@@ -2,9 +2,15 @@ import React from "react"
 import Message from "./Message/Message"
 import { List, Row, Col, Card, Button } from "antd"
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
-import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons"
+import {
+	DeleteOutlined,
+	EditOutlined,
+	EyeOutlined,
+	AppstoreOutlined
+} from "@ant-design/icons"
 import { removeMessage } from "../../../Actions/wallActions"
 import { Link } from "react-router-dom"
+import Title from "antd/lib/typography/Title"
 
 const Messages = props => {
 	const { messages, session } = useSelector(
@@ -13,10 +19,10 @@ const Messages = props => {
 	)
 	const dispatch = useDispatch()
 
-	const currentUser = session || {}
+	const currentUser = session.currentUser || {}
 	const getActions = message => {
 		return [
-			currentUser.id === message.author.id && (
+			currentUser.id === parseInt(message.author.id) && (
 				<Button
 					size={"small"}
 					style={{ border: 0 }}
@@ -25,7 +31,7 @@ const Messages = props => {
 					<DeleteOutlined />
 				</Button>
 			),
-			currentUser.id === message.author.id && (
+			currentUser.id === parseInt(message.author.id) && (
 				<Link to={`/wall/messages/${message.id}/edit`}>
 					<Button style={{ border: 0 }} size={"small"}>
 						<EditOutlined />
@@ -42,7 +48,14 @@ const Messages = props => {
 	return (
 		<Row justify={"center"} gutter={[16, 16]}>
 			<Col xxl={10} xl={11} lg={12} md={18} sm={20} xs={24}>
-				<Card size={"small"} bordered={false} title={"Wall Messages"}>
+				<Card
+					size={"small"}
+					bordered={false}
+					title={
+						<Title level={3}>
+							<AppstoreOutlined /> Wall Messages
+						</Title>
+					}>
 					<List
 						itemLayout={"horizontal"}
 						dataSource={messages}

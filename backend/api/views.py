@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from .permissions import OwnProfilePermission
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -36,6 +37,13 @@ class UserList(APIView):
         serializer = UserSerializerWithToken(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            send_mail(
+             'Welcome to wall app',
+             'Welcome to wall app! Now you can start posting new messages!',
+             'master@wallapp.com',
+             [request.data.email],
+             fail_silently=True,
+            ) ## Failing silently in development
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         

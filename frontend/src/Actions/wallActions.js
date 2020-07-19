@@ -40,7 +40,7 @@ export const removeMessage = data => dispatch =>
 		}
 	})
 		.then(handleErrors)
-		.then(message => dispatch({ type: "ADD_MESSAGE", message }))
+		.then(message => dispatch({ type: "REMOVE_MESSAGE", message }))
 		.catch(err => message.error(err.message))
 
 export const updateMessage = data => dispatch =>

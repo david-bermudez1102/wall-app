@@ -3,6 +3,8 @@ import { Row, Col, Card, Button } from "antd"
 import MessageForm from "./MessageForm"
 import { useSelector, shallowEqual } from "react-redux"
 import { Link } from "react-router-dom"
+import Title from "antd/lib/typography/Title"
+import { PlusOutlined } from "@ant-design/icons"
 
 const MessageFormLayout = () => {
 	const { session } = useSelector(({ session }) => ({ session }), shallowEqual)
@@ -12,7 +14,11 @@ const MessageFormLayout = () => {
 				<Card size={"small"} bordered={false}>
 					{session.isLoggedIn ? (
 						<Card.Meta
-							title={"Create a new message"}
+							title={
+								<Title level={3}>
+									<PlusOutlined /> Create a new message
+								</Title>
+							}
 							description={<MessageForm />}
 						/>
 					) : (

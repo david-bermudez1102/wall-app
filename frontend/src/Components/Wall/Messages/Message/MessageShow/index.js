@@ -25,8 +25,6 @@ const MessageShow = () => {
 		setVisible(false)
 	}
 
-	console.log(currentUser)
-
 	if (!message) return <Result status={"404"} />
 	return (
 		<Drawer

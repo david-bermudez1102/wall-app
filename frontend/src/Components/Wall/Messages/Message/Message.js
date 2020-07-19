@@ -1,8 +1,9 @@
 import React from "react"
-import { Comment, Avatar } from "antd"
+import { Comment, Avatar, Tooltip } from "antd"
 import formatDistance from "date-fns/formatDistance"
 import { UserOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
+import { format } from "date-fns"
 
 const Message = ({ message }) => {
 	const { author, content, created, updated } = message
@@ -17,9 +18,20 @@ const Message = ({ message }) => {
 				</Link>
 			}
 			content={content}
-			datetime={formatDistance(new Date(created), new Date(), {
-				addSuffix: true
-			})}
+			datetime={
+				<Tooltip
+					title={
+						<>
+							Created: {format(new Date(created), "PPPppp")}
+							<br />
+							Updated: {format(new Date(updated), "PPPppp")}
+						</>
+					}>
+					{formatDistance(new Date(created), new Date(), {
+						addSuffix: true
+					})}
+				</Tooltip>
+			}
 		/>
 	)
 }
