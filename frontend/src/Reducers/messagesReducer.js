@@ -10,6 +10,12 @@ export const messages = (state = [], action) => {
 			return state.map(message =>
 				message.id === action.message.id ? action.message : message
 			)
+		case "ADD_MESSAGE_REPLIES":
+			return state.map(message =>
+				message.id === action.reply.message_id
+					? { ...message, replies: [...message.replies, action.reply] }
+					: message
+			)
 		default:
 			return state
 	}

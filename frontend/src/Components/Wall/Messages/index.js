@@ -24,6 +24,7 @@ const Messages = ({ userMessages, user }) => {
 		return [
 			currentUser.id === parseInt(message.user.id) && (
 				<Button
+					key={`delete_message_${message.id}`}
 					size={"small"}
 					style={{ border: 0 }}
 					onClick={() => dispatch(removeMessage(message))}
@@ -32,13 +33,17 @@ const Messages = ({ userMessages, user }) => {
 				</Button>
 			),
 			currentUser.id === parseInt(message.user.id) && (
-				<Link to={`/wall/messages/${message.id}/edit`}>
+				<Link
+					to={`/wall/messages/${message.id}/edit`}
+					key={`edit_message_${message.id}`}>
 					<Button style={{ border: 0 }} size={"small"}>
 						<EditOutlined />
 					</Button>
 				</Link>
 			),
-			<Link to={`/wall/messages/${message.id}`}>
+			<Link
+				to={`/wall/messages/${message.id}`}
+				key={`view_message_${message.id}`}>
 				<Button style={{ border: 0 }} size={"small"}>
 					<EyeOutlined />
 				</Button>
@@ -63,11 +68,15 @@ const Messages = ({ userMessages, user }) => {
 						</Title>
 					}>
 					<List
-						itemLayout={"horizontal"}
+						itemLayout={"vertical"}
 						dataSource={userMessages || messages}
 						renderItem={message => (
-							<List.Item actions={getActions(message)}>
-								<Message message={message} />
+							<List.Item extra={getActions(message)}>
+								<Message message={message}>
+									{message.replies.map(reply => (
+										<Message message={reply} key={`reply_${reply.id}`} />
+									))}
+								</Message>
 							</List.Item>
 						)}
 					/>

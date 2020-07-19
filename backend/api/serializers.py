@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 
-from .models import Message
+from .models import Message, Reply
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -34,17 +34,18 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = User
         fields = ('token', 'username', 'email', 'password', 'first_name', 'last_name')
 
+class ReplySerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    message_id = serializers.ReadOnlyField(source='message.id', read_only=True)
+
+    class Meta:
+        model = Reply
+        fields = ('id','user', 'message_id', 'content', 'created', 'updated')
 
 class MessageSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    replies = ReplySerializer(source="reply_set", many=True, required=False)
     
     class Meta:
         model = Message
-        fields = ('id','user', 'content', 'created', 'updated')
-        
-class ReplySerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    
-    class Meta:
-        model = Message
-        fields = ('id','user', 'message_id', 'content', 'created', 'updated')
+        fields = ('id','user', 'content', 'replies', 'created', 'updated')

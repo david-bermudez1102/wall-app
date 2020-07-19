@@ -9,6 +9,9 @@ class Message(models.Model):
  created = models.DateTimeField(auto_now_add=True)
  updated = models.DateTimeField(auto_now=True)
 
+ def __str__(self):
+  return self.content
+
 class Reply(models.Model):
  message = models.ForeignKey(Message, on_delete=models.CASCADE)
  user = models.ForeignKey('auth.user', on_delete=models.CASCADE)
@@ -18,4 +21,8 @@ class Reply(models.Model):
 
  def __str__(self):
   return self.content
+
+ class Meta:
+  ordering = ['-created']
+
 

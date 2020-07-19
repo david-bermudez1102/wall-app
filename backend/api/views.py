@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from .permissions import OwnProfilePermission, CustomUsersPermissions
 from django.core.mail import send_mail
 from rest_framework_extensions.mixins import NestedViewSetMixin
-
+from django.urls import resolve
 
 
 # Create your views here.
@@ -38,8 +38,10 @@ class ReplyViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = (OwnProfilePermission,)
 
     def perform_create(self, serializer):
-     serializer.save(user=self.request.user)
+     message = Message.objects.get(id=self.get_parents_query_dict()["message"])
+     serializer.save(user=self.request.user, message=message)
      return Response(serializer.data)
+
 
 class UserList(APIView):
     permission_classes = (CustomUsersPermissions,)
